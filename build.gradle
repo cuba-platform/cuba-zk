@@ -1,0 +1,86 @@
+
+buildscript {
+    ext.cubaVersion = '6.5-SNAPSHOT'
+    repositories {
+        mavenLocal()
+        maven {
+            url 'http://repository.haulmont.com:8587/nexus/content/groups/work'
+            credentials {
+                username(rootProject.hasProperty('repoUser') ? rootProject['repoUser'] : 'developer')
+                password(rootProject.hasProperty('repoPass') ? rootProject['repoPass'] : 'Haul2010')
+            }
+        }
+    }
+    dependencies {
+        classpath "com.haulmont.gradle:cuba-plugin:$cubaVersion"
+        classpath "com.haulmont.cuba:cuba-global:$cubaVersion"
+    }
+}
+
+def globalModule = project(':cubazk-global')
+def coreModule = project(':cubazk-core')
+def webModule = project(':cubazk-web')
+
+apply(plugin: 'idea')
+apply(plugin: 'cuba')
+
+cuba {
+    artifact {
+        group = 'com.haulmont.addon.zookeeper'
+        version = '1.0.0'
+        isSnapshot = true
+    }
+    ide {
+        vcs = 'Git'
+    }
+}
+
+configure([globalModule, coreModule, webModule]) {
+    apply(plugin: 'java')
+    apply(plugin: 'maven')
+    apply(plugin: 'idea')
+    apply(plugin: 'cuba')
+
+    dependencies {
+        testCompile('junit:junit:4.12')
+    }
+
+    task sourceJar(type: Jar) {
+        from file('src')
+        classifier = 'sources'
+    }
+
+    artifacts {
+        archives sourceJar
+    }
+}
+
+configure(globalModule) {
+    dependencies {
+        compile('org.apache.curator:curator-framework:2.12.0')
+        compile('org.apache.curator:curator-recipes:2.12.0')
+    }
+
+    jar {
+        manifest {
+            attributes('App-Component-Id': cuba.artifact.group)
+            attributes('App-Component-Version': cuba.artifact.version + (cuba.artifact.isSnapshot ? '-SNAPSHOT' : ''))
+        }
+    }
+}
+
+configure(coreModule) {
+    dependencies {
+        compile(globalModule)
+    }
+}
+
+configure(webModule) {
+    dependencies {
+        compile(globalModule)
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.1'
+}

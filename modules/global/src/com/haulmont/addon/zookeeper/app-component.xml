@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<app-component xmlns="http://schemas.haulmont.com/cuba/app-component.xsd"
+               dependsOn="com.haulmont.cuba">
+    <module blocks="*"
+            name="global">
+        <artifact appJar="true"
+                  name="cubazk-global"/>
+    </module>
+    <module blocks="core"
+            dependsOn="global"
+            name="core">
+        <artifact appJar="true"
+                  name="cubazk-core"/>
+        <property name="cuba.springContextConfig"
+                  value="+com/haulmont/addon/zookeeper/spring.xml"/>
+    </module>
+    <module blocks="web"
+            name="web">
+        <artifact appJar="true"
+                  name="cubazk-web"/>
+        <artifact classifier="web"
+                  configuration="webcontent"
+                  ext="zip"
+                  name="cubazk-web"/>
+        <property name="cuba.springContextConfig"
+                  value="+com/haulmont/addon/zookeeper/web-spring.xml"/>
+    </module>
+</app-component>
