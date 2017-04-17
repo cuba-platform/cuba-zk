@@ -2,15 +2,15 @@
 
 ## Overview
 
-The addon is designed for coordinating CUBA cluster using [ZooKeeper](https://zookeeper.apache.org/). 
+The add-on is designed for coordinating CUBA cluster using [ZooKeeper](https://zookeeper.apache.org/). 
 
 Standard CUBA implementation of service discovery assumes that there is a static fixed list of available middleware servers. This list must be provided both for inter-server communication mechanism based on JGroups and for clients connecting to the cluster. 
 
-The add-on allows cluster members and clients to communicate through a ZooKeeper instance or ensemble. It enables simple and uniform configuration of middleware and client blocks: they need only the ZooKeeper address to form the cluster and to connect to it. In other words, the addon provides dynamic service discovery.
+The add-on allows cluster members and clients to communicate through a ZooKeeper instance or ensemble. It enables simple and uniform configuration of middleware and client blocks: they need only the ZooKeeper address to form the cluster and to connect to it. In other words, the add-on provides dynamic service discovery.
 
 ## Usage
 
-Select a version of the plugin which is compatible with the platform version used in your project:
+Select a version of the add-on which is compatible with the platform version used in your project:
 
 | Platform Version | Add-on Version |
 | ---------------- | -------------- |
