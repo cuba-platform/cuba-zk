@@ -1,4 +1,4 @@
-# CUBA ZooKeeper integration add-on
+# CUBA ZooKeeper Integration Add-on
 
 ## Overview
 
@@ -10,13 +10,17 @@ The add-on allows cluster members and clients to communicate through a ZooKeeper
 
 ## Usage
 
-The latest version of the add-on is 1.0.0 and it is compatible with projects based on CUBA Platform version 6.5.
+Select a version of the plugin which is compatible with the platform version used in your project:
+
+| Platform Version | Add-on Version |
+| ---------------- | -------------- |
+| 6.5.0.RC1        | 0.1.0          |
 
 Add custom application component to your project:
 
 * Artifact group: `com.haulmont.addon.zookeeper`
 * Artifact name: `cubazk-global`
-* Version: `1.0.0`
+* Version: *add-on version*
 
 Launch ZooKeeper on your network. Further, it is assumed that the ZooKeeper address is `192.168.0.1:2181`.
 

@@ -18,10 +18,6 @@
             name="web">
         <artifact appJar="true"
                   name="cubazk-web"/>
-        <artifact classifier="web"
-                  configuration="webcontent"
-                  ext="zip"
-                  name="cubazk-web"/>
         <property name="cuba.springContextConfig"
                   value="+com/haulmont/addon/zookeeper/web-spring.xml"/>
     </module>
