@@ -33,9 +33,6 @@ cuba {
     ide {
         vcs = 'Git'
     }
-    uploadRepository {
-        url = 'https://repo.cuba-platform.com/content/repositories/releases'
-    }
 }
 
 configure([globalModule, coreModule, webModule]) {
