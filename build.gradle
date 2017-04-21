@@ -1,6 +1,6 @@
 
 buildscript {
-    ext.cubaVersion = '6.5.0.RC1'
+    ext.cubaVersion = '6.5.0'
     repositories {
         mavenLocal()
         maven {
@@ -27,7 +27,7 @@ apply(plugin: 'cuba')
 cuba {
     artifact {
         group = 'com.haulmont.addon.zookeeper'
-        version = '0.1.0'
+        version = '1.0.0'
         isSnapshot = false
     }
     ide {
