@@ -20,11 +20,9 @@ Select a version of the add-on which is compatible with the platform version use
 | 6.5.x            | 1.0.0          |
 | 6.5.0.RC1        | 0.1.0          |
 
-Add custom application component to your project:
+Add custom application component to your project (change the version part if needed):
 
-* Artifact group: `com.haulmont.addon.zookeeper`
-* Artifact name: `cubazk-global`
-* Version: *add-on version*
+`com.haulmont.addon.zookeeper:cubazk-global:1.3.0`
 
 Launch ZooKeeper on your network. Further, it is assumed that the ZooKeeper address is `192.168.0.1:2181`.
 
