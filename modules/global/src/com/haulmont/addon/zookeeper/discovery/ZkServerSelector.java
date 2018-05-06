@@ -132,13 +132,15 @@ public class ZkServerSelector extends StickySessionServerSelector {
     protected void initialDiscovery() {
         List<String> list = new ArrayList<>();
         try {
-            for (String node : curator.getChildren().forPath(ZkProperties.ROOT_PATH)) {
-                String nodePath = ZKPaths.makePath(ZkProperties.ROOT_PATH, node);
-                byte[] bytes = curator.getData().forPath(nodePath);
-                if (bytes != null) {
-                    String url = new String(bytes, StandardCharsets.UTF_8);
-                    if (!list.contains(url))
-                        list.add(url);
+            if (curator.checkExists().forPath(ZkProperties.ROOT_PATH) != null) {
+                for (String node : curator.getChildren().forPath(ZkProperties.ROOT_PATH)) {
+                    String nodePath = ZKPaths.makePath(ZkProperties.ROOT_PATH, node);
+                    byte[] bytes = curator.getData().forPath(nodePath);
+                    if (bytes != null) {
+                        String url = new String(bytes, StandardCharsets.UTF_8);
+                        if (!list.contains(url))
+                            list.add(url);
+                    }
                 }
             }
         } catch (Exception e) {
