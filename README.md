@@ -14,17 +14,17 @@ Select a version of the add-on which is compatible with the platform version use
 
 | Platform Version | Add-on Version |
 | ---------------- | -------------- |
+| 7.0.x            | 1.6.0          |
 | 6.10.x           | 1.5.0          |
 | 6.9.x            | 1.4.0          |
 | 6.8.x            | 1.3.1          |
 | 6.7.x            | 1.2.0          |
 | 6.6.x            | 1.1.0          |
 | 6.5.x            | 1.0.0          |
-| 6.5.0.RC1        | 0.1.0          |
 
 Add custom application component to your project (change the version part if needed):
 
-`com.haulmont.addon.zookeeper:cubazk-global:1.5.0`
+`com.haulmont.addon.zookeeper:cubazk-global:1.6.0`
 
 Launch ZooKeeper on your network. Further, it is assumed that the ZooKeeper address is `192.168.0.1:2181`.
 
