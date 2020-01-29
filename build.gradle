@@ -1,15 +1,23 @@
 
 buildscript {
-    ext.cubaVersion = '7.1.0'
+    ext.cubaVersion = rootProject.hasProperty('cubaVersion') ? rootProject['cubaVersion'] : '7.2-SNAPSHOT'
     repositories {
         mavenLocal()
-        maven {
-            url 'https://repo.cuba-platform.com/content/groups/work'
-            credentials {
-                username(rootProject.hasProperty('repoUser') ? rootProject['repoUser'] : 'cuba')
-                password(rootProject.hasProperty('repoPass') ? rootProject['repoPass'] : 'cuba123')
+
+        if (System.getenv('HAULMONT_REPOSITORY_URL')) {
+            maven {
+                credentials {
+                    username System.getenv('HAULMONT_REPOSITORY_USER')
+                    password System.getenv('HAULMONT_REPOSITORY_PASSWORD')
+                }
+                url System.getenv('HAULMONT_REPOSITORY_URL')
             }
         }
+
+        maven {
+            url 'https://dl.bintray.com/cuba-platform/main'
+        }
+
     }
     dependencies {
         classpath "com.haulmont.gradle:cuba-plugin:$cubaVersion"
@@ -17,9 +25,11 @@ buildscript {
     }
 }
 
-def globalModule = project(':cubazk-global')
-def coreModule = project(':cubazk-core')
-def webModule = project(':cubazk-web')
+def modulePrefix = 'cubazk'
+
+def globalModule = project(":${modulePrefix}-global")
+def coreModule = project(":${modulePrefix}-core")
+def webModule = project(":${modulePrefix}-web")
 
 apply(plugin: 'idea')
 apply(plugin: 'cuba')
@@ -27,12 +37,16 @@ apply(plugin: 'cuba')
 cuba {
     artifact {
         group = 'com.haulmont.addon.zookeeper'
-        version = '1.7.0'
-        isSnapshot = false
+        version = '1.8'
+        isSnapshot = true
     }
     ide {
         vcs = 'Git'
     }
+}
+
+dependencies {
+    appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
 }
 
 configure([globalModule, coreModule, webModule]) {
@@ -57,6 +71,10 @@ configure([globalModule, coreModule, webModule]) {
 
 configure(globalModule) {
     dependencies {
+        if (!JavaVersion.current().isJava8()) {
+            runtime('javax.xml.bind:jaxb-api:2.3.1')
+            runtime('org.glassfish.jaxb:jaxb-runtime:2.3.1')
+        }
         compile('org.apache.curator:curator-framework:2.12.0')
         compile('org.apache.curator:curator-recipes:2.12.0')
     }

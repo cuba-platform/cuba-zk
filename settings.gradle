@@ -1,5 +1,6 @@
 rootProject.name = 'cubazk'
-include(':cubazk-global', ':cubazk-core', ':cubazk-web')
-project(':cubazk-global').projectDir = new File(settingsDir, 'modules/global')
-project(':cubazk-core').projectDir = new File(settingsDir, 'modules/core')
-project(':cubazk-web').projectDir = new File(settingsDir, 'modules/web')
+def modulePrefix = 'cubazk'
+include(":${modulePrefix}-global", ":${modulePrefix}-core", ":${modulePrefix}-web")
+project(":${modulePrefix}-global").projectDir = new File(settingsDir, 'modules/global')
+project(":${modulePrefix}-core").projectDir = new File(settingsDir, 'modules/core')
+project(":${modulePrefix}-web").projectDir = new File(settingsDir, 'modules/web')
