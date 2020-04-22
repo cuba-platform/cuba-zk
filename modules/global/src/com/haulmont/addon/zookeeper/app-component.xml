@@ -5,6 +5,8 @@
             name="global">
         <artifact appJar="true"
                   name="cubazk-global"/>
+        <property name="cuba.creditsConfig"
+                  value="+com/haulmont/addon/zookeeper/credits.xml"/>
     </module>
     <module blocks="core"
             dependsOn="global"
